@@ -234,7 +234,7 @@ contract ExampleNFT is ERC721, ERC721Enumerable, Ownable {
      * @dev white list mint ExampleNFT.
      * @notice check white list sale active, tier supply, max supply, max balance, number of mint < max mint, payable amount.
      */
-    function whiteListExampleNFT(uint256 numEXNs) public payable {
+    function whiteListMintExampleNFT(uint256 numEXNs) public payable {
         require(_isWhiteListSaleActive, "Sale must be active to mint ExampleNFT");
         require(
             totalSupply() + numEXNs <= tierSupply,
