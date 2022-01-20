@@ -10,7 +10,8 @@
     "networks": "truffle networks",
     "networks-clean": "truffle networks --clean",
     "test": "DEPLOY_ALL=1 truffle test",
-    "migrate-rinkeby": "NODE_ENV=staging truffle migrate --network rinkeby"
+    "migrate-rinkeby": "NODE_ENV=staging truffle migrate --network rinkeby",
+    "example-mint": "NODE_ENV=staging ts-node ./scripts/example_mint.ts"
   },
   "repository": {
     "type": "git",
@@ -50,6 +51,7 @@
     "eslint": "^7.22.0",
     "truffle-plugin-verify": "^0.5.8",
     "truffle-typings": "^1.0.8",
+    "ts-node": "^10.4.0",
     "typescript": "^4.5.4"
   }
 }
