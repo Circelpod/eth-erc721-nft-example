@@ -42,21 +42,21 @@ contract ExampleNFT is ERC721, ERC721Enumerable, Ownable {
     /**
      * switch to white list sale
      */
-    function flipWhiteListSaleActive() public onlyOwner {
+    function switchWhiteListSaleActive() public onlyOwner {
         _isWhiteListSaleActive = !_isWhiteListSaleActive;
     }
 
     /**
      * switch to sale
      */
-    function filpSaleActive() public onlyOwner {
+    function switchSaleActive() public onlyOwner {
         _isSaleActive = !_isSaleActive;
     }
 
     /**
      * switch to auction
      */
-    function flipAuctionActive() public onlyOwner {
+    function switchAuctionActive() public onlyOwner {
         _isAuctionActive = !_isAuctionActive;
     }
 

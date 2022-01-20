@@ -18,33 +18,33 @@
  *
  */
 
- require("ts-node").register({
-  files: true,
-});
+require("dotenv").config({ path: `./.env.${process.env.NODE_ENV}` });
 
- const HDWalletProvider = require("truffle-hdwallet-provider");
+const HDWalletProvider = require("truffle-hdwallet-provider");
 
- const MNEMONIC = process.env.MNEMONIC;
- const NODE_API_KEY = process.env.INFURA_KEY || process.env.ALCHEMY_KEY;
- const isInfura = !!process.env.INFURA_KEY;
- 
- const needsNodeAPI =
-   process.env.npm_config_argv &&
-   (process.env.npm_config_argv.includes("rinkeby") ||
-     process.env.npm_config_argv.includes("live"));
- 
- if ((!MNEMONIC || !NODE_API_KEY) && needsNodeAPI) {
-   console.error("Please set a mnemonic and ALCHEMY_KEY or INFURA_KEY.");
-   process.exit(0);
- }
- 
- const rinkebyNodeUrl = isInfura
-   ? "https://rinkeby.infura.io/v3/" + NODE_API_KEY
-   : "https://eth-rinkeby.alchemyapi.io/v2/" + NODE_API_KEY;
- 
- const mainnetNodeUrl = isInfura
-   ? "https://mainnet.infura.io/v3/" + NODE_API_KEY
-   : "https://eth-mainnet.alchemyapi.io/v2/" + NODE_API_KEY;
+const MNEMONIC = process.env.MNEMONIC;
+const NODE_API_KEY = process.env.INFURA_KEY || process.env.ALCHEMY_KEY;
+const isInfura = !!process.env.INFURA_KEY;
+
+const needsNodeAPI =
+  process.env.npm_config_argv &&
+  (process.env.npm_config_argv.includes("rinkeby") ||
+    process.env.npm_config_argv.includes("live"));
+
+if ((!MNEMONIC || !NODE_API_KEY) && needsNodeAPI) {
+  console.error(
+    `Please set a mnemonic and ALCHEMY_KEY or INFURA_KEY. ${MNEMONIC} ${NODE_API_KEY} ${needsNodeAPI}`
+  );
+  process.exit(0);
+}
+
+const rinkebyNodeUrl = isInfura
+  ? "https://rinkeby.infura.io/v3/" + NODE_API_KEY
+  : "https://eth-rinkeby.alchemyapi.io/v2/" + NODE_API_KEY;
+
+const mainnetNodeUrl = isInfura
+  ? "https://mainnet.infura.io/v3/" + NODE_API_KEY
+  : "https://eth-mainnet.alchemyapi.io/v2/" + NODE_API_KEY;
 
 module.exports = {
   /**
@@ -100,13 +100,13 @@ module.exports = {
   // Configure your compilers
   compilers: {
     solc: {
-      version: "0.8.11", 
+      version: "0.8.11",
       settings: {
         optimizer: {
           enabled: true,
-          runs: 20   // Optimize for how many times you intend to run the code
+          runs: 20, // Optimize for how many times you intend to run the code
         },
-      },   // Fetch exact version from solc-bin (default: truffle's version)
+      }, // Fetch exact version from solc-bin (default: truffle's version)
       // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
       // settings: {          // See the solidity docs for advice about optimization and evmVersion
       //  optimizer: {
@@ -115,7 +115,7 @@ module.exports = {
       //  },
       //  evmVersion: "byzantium"
       // }
-    }
+    },
   },
 
   // Truffle DB is currently disabled by default; to enable it, change enabled:
@@ -125,17 +125,17 @@ module.exports = {
   // NOTE: It is not possible to migrate your contracts to truffle DB and you should
   // make a backup of your artifacts to a safe location before enabling this feature.
   //
-  // After you backed up your artifacts you can utilize db by running migrate as follows: 
+  // After you backed up your artifacts you can utilize db by running migrate as follows:
   // $ truffle migrate --reset --compile-all
   //
   // db: {
-    // enabled: false,
-    // host: "127.0.0.1",
-    // adapter: {
-    //   name: "sqlite",
-    //   settings: {
-    //     directory: ".db"
-    //   }
-    // }
+  // enabled: false,
+  // host: "127.0.0.1",
+  // adapter: {
+  //   name: "sqlite",
+  //   settings: {
+  //     directory: ".db"
+  //   }
+  // }
   // }
 };
